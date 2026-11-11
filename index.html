@@ -829,6 +829,7 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
 
   /* rep sales by year (personal sales, $K, from their interviews) */
   function reps(id,rows){
+    if(!$(id)) return;
     var mx=Math.max.apply(null,rows.map(function(r){return r[1]}));
     $(id).innerHTML=rows.map(function(r){return '<div><span class="mono">'+r[0]+'</span><i style="width:'+(r[1]/mx*100)+'%"></i><span class="mono">$'+r[1]+'K</span></div>'}).join("");
   }
@@ -952,7 +953,7 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
       '<div class="stage money"><span>New revenue per month</span><b class="mono">'+money(clients*deal)+'</b></div>'+
       '<div class="stage"><span>Austin\'s strategy-session time per month</span><b class="mono">'+(held*50/60).toFixed(1)+' h</b></div>';
   }
-  simIds.forEach(function(k){$("#s-"+k).addEventListener("input",sim)}); sim();
+  if($("#s-vis")){ simIds.forEach(function(k){$("#s-"+k).addEventListener("input",sim)}); sim(); }
 
   /* capacity mix */
   var mix={prod:4,lead:2,team:1,div:1,circle:1};
@@ -965,7 +966,7 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
     var hrs=0,mo=0; mixItems.forEach(function(t){hrs+=mix[t.id]*t.hrs; mo+=mix[t.id]*t.mo;});
     $("#k-hrs").textContent=(hrs*12/52).toFixed(1); $("#k-mo").textContent=money(mo); $("#k-yr").textContent=money(mo*12); $("#k-x").textContent=(mo/2000).toFixed(1)+"×";
   }
-  renderMix();
+  if($("#mix")) renderMix();
 })();
 </script>
 
