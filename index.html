@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="public" data-mode="site">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
 <style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}</style>
-<title>The Long Game Funnel</title>
+<title>The Long Game</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@500&display=swap">
@@ -23,11 +24,13 @@
   --accent:var(--accent-l); --brass:var(--brass-l); --on-accent:#ffffff;
   --good:#1f7a4a; --warn:#a15c00; --bad:#b3261e;
   --good-bg:#e3f2e9; --warn-bg:#fbefdc; --bad-bg:#fbe5e3;
+  --band:#0f1526; --band-2:#1a2340; --band-fg:#eef0f6; --band-muted:#aeb6ca; --band-accent:#9fb0ff; --band-line:rgba(255,255,255,.14);
 }
 :root[data-brand="li"]{
   --accent-l:#0e1b2a; --accent-d:#d3ab60;
   --brass-l:#ab8543; --brass-d:#d3ab60;
   --cover:#0e1b2a; --cover-fg:#efede7;
+  --band:#0b1622; --band-2:#16283c; --band-fg:#efede7; --band-muted:#b9b6ac; --band-accent:#d3ab60;
   --display:Georgia, "Times New Roman", serif;
 }
 @media (prefers-color-scheme: dark){
@@ -47,8 +50,8 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--body);}
-.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);overflow-x:clip;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));}
 h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.1;margin:0}
 p{margin:0}
 a{color:var(--accent)}
@@ -61,9 +64,10 @@ button,input,select{font:inherit;color:inherit}
 /* mock-up banner + rail */
 .banner{background:var(--fg);color:var(--bg);font-size:13px}
 .banner .wrap{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;padding-block:8px}
-.brandpick{display:flex;gap:4px;align-items:center}
-.brandpick button{background:transparent;border:1px solid color-mix(in srgb,var(--bg) 40%,transparent);color:var(--bg);border-radius:999px;padding:3px 10px;cursor:pointer;font-size:12px}
-.brandpick button[aria-pressed="true"]{background:var(--bg);color:var(--fg)}
+.picks{display:flex;gap:6px 18px;flex-wrap:wrap}
+.pick{display:flex;gap:4px;align-items:center}
+.pick button{background:transparent;border:1px solid color-mix(in srgb,var(--bg) 40%,transparent);color:var(--bg);border-radius:999px;padding:3px 10px;cursor:pointer;font-size:12px}
+.pick button[aria-pressed="true"]{background:var(--bg);color:var(--fg)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
 .rail{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
 .rail ol{list-style:none;margin:0;padding:0;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
@@ -222,6 +226,65 @@ tr:last-child td{border-bottom:0}
 .src code{font-family:var(--mono);font-size:12px;word-break:break-all}
 footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
 
+/* pro layer: real site chrome, dark hero band, reveal, FAQ */
+.hdr{display:none;position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.hdr .logo{text-decoration:none;color:var(--fg);font-size:19px}
+.hdr nav{display:flex;align-items:center;gap:6px}
+.hdr nav a:not(.btn){padding:8px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:500;font-size:15px;transition:color .15s,background .15s}
+.hdr nav a:not(.btn):hover{color:var(--fg);background:var(--sunk)}
+.hdr nav a[aria-current="page"]{color:var(--fg)}
+.hdr nav a[aria-current="page"]::after{content:"";display:block;height:2px;background:var(--accent);border-radius:2px;margin-top:2px}
+.btn.sm{padding:9px 14px;font-size:14px;margin-left:8px}
+.menu{display:none;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 12px;font-weight:600;cursor:pointer}
+.cta-bar{display:none}
+:root[data-mode="site"] .hdr{display:block}
+:root[data-mode="site"] .rail,:root[data-mode="site"] .chrome,:root[data-mode="site"] .sitenav,:root[data-mode="site"] .stepnav,:root[data-mode="site"] .internal,:root[data-mode="site"] .tier .hrs,:root[data-mode="site"] .note{display:none}
+:root[data-mode="site"] .browser{border:0;border-radius:0;background:transparent;margin-block:0;overflow:visible}
+:root[data-mode="site"] .site{padding-inline:0;padding-block:0 clamp(40px,6vw,80px)}
+:root[data-mode="site"] .view:not(#v-book) .site{padding-top:clamp(32px,5vw,64px)}
+:root.public .picks{display:none}
+.band{position:relative;color:var(--band-fg);padding-block:clamp(36px,6vw,84px);margin-bottom:clamp(28px,4vw,48px)}
+.band::before{content:"";position:absolute;inset:0 -100vmax;background:radial-gradient(1200px 500px at 70% 0%,var(--band-2),var(--band) 70%);z-index:0}
+.band>*{position:relative;z-index:1}
+.band .label{color:var(--brass-d)}
+.band .hero h1 em{color:var(--band-accent)}
+.band .hero .lede,.band .small{color:var(--band-muted)}
+.band a{color:var(--band-fg)}
+.band .optin input{background:rgba(255,255,255,.07);border-color:var(--band-line);color:var(--band-fg)}
+.band .optin input::placeholder{color:var(--band-muted)}
+.band .btn.primary{background:var(--band-accent);color:#0d1220}
+.band .cover{background:linear-gradient(150deg,color-mix(in srgb,var(--cover) 78%,#fff) 0%,var(--cover) 55%);border:1px solid var(--band-line);box-shadow:0 1px 0 rgba(255,255,255,.08) inset,30px 40px 70px -30px rgba(0,0,0,.7)}
+.btn.primary::after{content:"→";transition:transform .2s}
+.btn.primary:hover::after{transform:translateX(3px)}
+.tiers{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:1040px){.tiers{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:600px){.tiers{grid-template-columns:minmax(0,1fr)}}
+.rv{transform:translateY(18px);opacity:.35;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease}
+.rv.in{transform:none;opacity:1}
+.faq{margin-top:48px;display:grid;gap:0;border-top:1px solid var(--line);max-width:780px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:18px 36px 18px 0;font:600 17px/1.35 var(--body);position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:14px;font:400 24px/1 var(--body);color:var(--accent);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 0 20px;color:var(--muted);max-width:62ch}
+.meter{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--muted)}
+.meter i{width:26px;height:6px;border-radius:3px;background:var(--line);display:block;transition:background .25s}
+.meter i.on{background:var(--good)}
+.ftr{border-top:1px solid var(--line);margin-top:24px;padding-block:28px 48px;display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted)}
+.ftr nav{display:flex;gap:18px;flex-wrap:wrap}.ftr a{color:var(--muted);text-decoration:none}.ftr a:hover{color:var(--fg)}
+@media (max-width:760px){
+  .menu{display:block}
+  .hdr nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--surface);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}
+  .hdr nav.open{display:flex}
+  .hdr nav a:not(.btn){padding:12px 8px;font-size:16px}
+  .hdr nav a[aria-current="page"]::after{display:none}
+  .btn.sm{margin:8px 0 0;justify-content:center}
+  :root[data-mode="site"] .cta-bar.show{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:6;justify-content:center;gap:8px;padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--accent);color:var(--on-accent);font-weight:600;text-decoration:none}
+  :root[data-mode="site"] main{padding-bottom:64px}
+}
+
 /* interactive layer */
 .prog{height:3px;background:var(--line)}
 .prog i{display:block;height:100%;width:0;background:var(--accent);transition:width .45s cubic-bezier(.2,.7,.2,1)}
@@ -322,13 +385,33 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
 <body>
 
 <div class="banner"><div class="wrap">
-  <span><b>Mock-up, not live.</b> A design concept. Nothing here sends, books or charges.</span>
-  <div class="brandpick" role="group" aria-label="Brand look">
+  <span><b>Design concept, not live.</b> Nothing here sends, books or charges.</span>
+  <div class="picks">
+  <div class="pick modepick" role="group" aria-label="View">
+    <span>View:</span>
+    <button type="button" id="mode-walk" aria-pressed="true" data-mode="walk">Walkthrough</button>
+    <button type="button" id="mode-site" aria-pressed="false" data-mode="site">Live site</button>
+  </div>
+  <div class="pick brandpick" role="group" aria-label="Brand look">
     <span>Look:</span>
     <button type="button" id="brand-own" aria-pressed="true" data-brand="own">Austin's own</button>
     <button type="button" id="brand-li" aria-pressed="false" data-brand="li">Lifestyle Investor style</button>
   </div>
+  </div>
 </div></div>
+
+<header class="hdr"><div class="wrap">
+  <a class="logo" href="#book">Austin Oberbillig<span>.</span></a>
+  <button class="menu" type="button" id="menu" aria-expanded="false" aria-controls="hnav">Menu</button>
+  <nav id="hnav" aria-label="Site">
+    <a href="#book" data-h="book">The book</a>
+    <a href="#about" data-h="about">About</a>
+    <a href="#programs" data-h="programs">Programs</a>
+    <a href="#apply" data-h="apply">Apply</a>
+    <a class="btn primary sm" href="#chapter">Read Chapter 1</a>
+  </nav>
+</div></header>
+<a class="cta-bar" id="ctabar" href="#chapter">Read Chapter 1 free →</a>
 
 <nav class="rail" aria-label="Funnel steps"><div class="wrap"><ol>
   <li><a href="#book" data-v="book"><span class="n">1</span>Book page</a></li>
@@ -347,7 +430,7 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
     <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">austinoberbillig.com/the-long-game</div></div>
     <div class="site">
       <div class="sitenav"><div class="logo">Austin Oberbillig<span>.</span></div><nav><span style="color:var(--fg)">The book</span><a href="#programs">Programs</a><a href="#about">About</a></nav></div>
-      <div class="hero">
+      <div class="band"><div class="hero">
         <div>
           <div class="label">A book about building sales teams that last</div>
           <h1 style="margin-top:12px">The weeks are the bricks. <em>They are not the house.</em></h1>
@@ -366,7 +449,7 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
             <div class="s">Five conversations that changed my life, and the systems that built a sales division</div>
           </div>
         </div>
-      </div>
+      </div></div>
       <div class="proof">
         <div><b class="mono">$10M+</b><span class="small">in sales (his LinkedIn headline)</span></div>
         <div><b>Hall of Fame</b><span class="small">Vector Marketing</span></div>
@@ -600,7 +683,7 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
         <div><span class="label">Bigger than this</span><b>Multi-office or company-wide</b><span class="mono">from $250,000 a year</span><span class="small">By application only, after a strategy session.</span></div>
       </div>
 
-      <h3 style="margin-top:40px;font-size:22px">Does it pay for itself?</h3>
+      <h3 style="margin-top:48px;font-size:22px">Does it pay for itself?</h3>
       <div class="calc">
         <div style="display:grid;gap:14px">
           <div class="field"><label for="c-reps">People on the team: <b class="mono" id="c-reps-o">10</b></label><input id="c-reps" type="range" min="2" max="40" value="10"></div>
@@ -614,12 +697,19 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
           <p id="c-say" style="font-weight:600"></p>
         </div>
       </div>
+      <h3 style="margin-top:56px;font-size:22px">Questions leaders ask first</h3>
+      <div class="faq">
+        <details open><summary>We already have a sales manager and a coach. Why add this?</summary><p>Good. This is built to sit next to them. Austin works on the part most teams miss: knowing your real numbers, recruiting the right people, and the standards that hold a team together.</p></details>
+        <details><summary>How long do teams stay?</summary><p>Programs run 3, 6 or 12 months and are built to end. Austin's rule: "If you're still working with me after 12 months, I haven't done my job."</p></details>
+        <details><summary>Who is this not for?</summary><p>Teams with fewer than five sellers, or leaders looking for a motivational speaker. Start with the book and the Real Numbers Workshop.</p></details>
+        <details><summary>What happens on the strategy session?</summary><p>Fifty minutes on Zoom. Austin goes through your team's numbers with you, tells you what he would fix first, and recommends one program, or none.</p></details>
+      </div>
     </div>
   </div>
 </section>
 
 
-<footer>Mock-up only. Prices, cut-offs and program names are suggestions for Austin to change.</footer>
+<footer class="ftr"><span><b style="color:var(--fg);font-family:var(--display)">Austin Oberbillig.</b> &nbsp;Design concept, not live.</span><nav aria-label="Footer"><a href="#book">The book</a><a href="#about">About</a><a href="#programs">Programs</a><a href="#apply">Apply</a></nav></footer>
 </main>
 
 <script>
@@ -637,6 +727,21 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
   document.querySelectorAll(".brandpick button").forEach(function(x){x.addEventListener("click",function(){setBrand(x.dataset.brand)})});
   try{var sb=localStorage.getItem("lg-brand"); if(sb) setBrand(sb);}catch(e){}
 
+  /* view mode: walkthrough (step rail, notes) or live site (real header, no notes) */
+  var root=document.documentElement, isPublic=root.classList.contains("public");
+  function setMode(m){
+    if(m==="site") root.setAttribute("data-mode","site"); else root.removeAttribute("data-mode");
+    document.querySelectorAll(".modepick button").forEach(function(x){x.setAttribute("aria-pressed",String(x.dataset.mode===m))});
+    if(!isPublic){try{localStorage.setItem("lg-mode",m)}catch(e){}}
+  }
+  document.querySelectorAll(".modepick button").forEach(function(x){x.addEventListener("click",function(){setMode(x.dataset.mode)})});
+  if(isPublic) setMode("site"); else { try{var sm=localStorage.getItem("lg-mode"); if(sm) setMode(sm);}catch(e){} }
+  var menu=$("#menu"), hnav=$("#hnav");
+  menu.addEventListener("click",function(){ var o=hnav.classList.toggle("open"); menu.setAttribute("aria-expanded",String(o)); });
+  hnav.addEventListener("click",function(e){ if(e.target.closest("a")){ hnav.classList.remove("open"); menu.setAttribute("aria-expanded","false"); } });
+
+  var still=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   /* routing */
   var views=["book","about","chapter","apply","call","programs"];
   var names={book:"Book page",about:"About Austin",chapter:"Free chapter",apply:"Application",call:"Strategy session",programs:"Programs"};
@@ -646,12 +751,26 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
     if(i<views.length-1) nav.innerHTML+='<a class="next" href="#'+views[i+1]+'"><span><small>Next</small>'+names[views[i+1]]+'</span><span class="kbd">→</span></a>';
     $("#v-"+n).appendChild(nav);
   });
-  var cur="book";
+  var cur="book", io=null;
+  function reveal(){
+    if(still||!("IntersectionObserver" in window)) return;
+    if(!io) io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } })},{rootMargin:"0px 0px -8% 0px"});
+    var v=$("#v-"+cur); if(!v) return;
+    v.querySelectorAll(".proof,.inside>div,.quote,.stats,.tl li,.rep,.tier,.mentors li,figure,.offer,.calc,.faq,.entry>div,.result,.day,.sim,.obj>div,.tbl,.flow>div,.kpi").forEach(function(el,i){
+      if(el.classList.contains("rv")) return;
+      var r=el.getBoundingClientRect(); if(r.top<window.innerHeight*0.9) return;
+      el.classList.add("rv"); el.style.transitionDelay=(i%4*60)+"ms"; io.observe(el);
+    });
+  }
   function show(){
     var v=(location.hash||"#book").slice(1); if(views.indexOf(v)<0) v="book"; cur=v;
     views.forEach(function(n){ $("#v-"+n).hidden=(n!==v); });
     document.querySelectorAll(".rail a").forEach(function(a){ if(a.dataset.v===v){ a.setAttribute("aria-current","page"); try{a.scrollIntoView({block:"nearest",inline:"center"})}catch(e){} } else a.removeAttribute("aria-current"); });
     $("#prog").style.width=(views.indexOf(v)/(views.length-1)*100)+"%";
+    var hv=(v==="call")?"apply":v;
+    document.querySelectorAll("#hnav a[data-h]").forEach(function(a){ if(a.dataset.h===hv) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+    $("#ctabar").classList.toggle("show",v==="book"||v==="about"||v==="programs");
+    reveal();
     window.scrollTo(0,0);
     if(v==="about"){ document.querySelectorAll(".yrs i").forEach(function(i){ i.style.animation="none"; void i.offsetWidth; i.style.animation=""; }); onScroll(); }
   }
@@ -664,7 +783,6 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
 
   /* book cover follows the pointer */
   var hero=document.querySelector(".hero"), cov=document.querySelector(".hero .cover");
-  var still=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if(hero&&cov&&!still){
     hero.addEventListener("pointermove",function(e){ var r=cov.getBoundingClientRect(); var x=(e.clientX-r.left-r.width/2)/r.width, y=(e.clientY-r.top-r.height/2)/r.height; cov.style.transform="perspective(900px) rotateY("+(x*14).toFixed(2)+"deg) rotateX("+(-y*10).toFixed(2)+"deg)"; });
     hero.addEventListener("pointerleave",function(){ cov.style.transform=""; });
@@ -689,8 +807,8 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
     var mx=Math.max.apply(null,rows.map(function(r){return r[1]}));
     $(id).innerHTML=rows.map(function(r){return '<div><span class="mono">'+r[0]+'</span><i style="width:'+(r[1]/mx*100)+'%"></i><span class="mono">$'+r[1]+'K</span></div>'}).join("");
   }
-  if($("#rep-a")) reps("#rep-a",[["2018",25],["2019",60],["2020",112],["2021",267],["2022",354],["2023+",300]]);
-  if($("#rep-z")) reps("#rep-z",[["Yr 1",50],["2022",200],["2023",225],["2024",250],["2025",325]]);
+  reps("#rep-a",[["2018",25],["2019",60],["2020",112],["2021",267],["2022",354],["2023+",300]]);
+  reps("#rep-z",[["Yr 1",50],["2022",200],["2023",225],["2024",250],["2025",325]]);
 
   /* cover bricks: 52 weeks, filled = weeks laid */
   var br=$("#bricks");
@@ -712,8 +830,9 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
     if(met===4){cls="good";tag="Qualified";h="Strategy session with Austin";body="Goes straight to Austin's calendar. Program fit: "+(team>=15?"Division Partnership":"Team Accelerator")+".";cta='<a class="btn primary" href="#call">Pick a time</a>';}
     else if((role==="producer"&&sales>=250)||(leader&&met===3)){cls="";tag="Close";h="20-minute fit call with Austin's team";body=role==="producer"?"A strong individual producer. Likely fit: Producer 1:1.":"Misses one rule. His team checks the fit before a session with Austin.";cta='<span class="small">Books with Austin\'s team first.</span>';}
     else {cls="warn";tag="Not yet";h="Email series and workshop invite";body="Gets the six-email series and an invite to the $997 Real Numbers Workshop.";cta='<span class="small">No call is booked.</span>';}
+    var pips=rules.map(function(x){return '<i'+(x?' class="on"':'')+'></i>'}).join("");
     r.className="result "+cls;
-    r.innerHTML='<span class="tag">'+tag+'</span><h3>'+h+'</h3><p class="small" style="color:var(--fg)">'+body+'</p>'+cta;
+    r.innerHTML='<div class="meter">'+pips+'<span>'+met+' of 4 requirements met</span></div><span class="tag">'+tag+'</span><h3>'+h+'</h3><p class="small" style="color:var(--fg)">'+body+'</p>'+cta;
   }
   fields.forEach(function(f){var el=$(f); el.addEventListener("input",route); el.addEventListener("change",route);});
   route();
@@ -766,7 +885,7 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
   function renderTiers(){
     $("#tiers").innerHTML=tiers.map(function(t){
       var ok=term>=t.min, m=ok?term:t.min, total=priceFor(t,m), per=total/m;
-      return '<div class="tier'+(t.feature?' feature':'')+(picked===t.id?' picked':'')+'" data-id="'+t.id+'" tabindex="0"><span class="who">'+t.who+(t.feature?' · most like what Austin does now':'')+'</span><h3>'+t.name+'</h3>'+
+      return '<div class="tier'+(t.feature?' feature':'')+(picked===t.id?' picked':'')+'" data-id="'+t.id+'" tabindex="0"><span class="who">'+t.who+(t.feature?'':'')+'</span><h3>'+t.name+'</h3>'+
         '<div class="p mono"><span class="tw" data-k="'+t.id+'" data-to="'+Math.round(total)+'">'+money(prevTot[t.id]||total)+'</span> <small>for '+m+' month'+(m>1?'s':'')+'</small></div>'+
         '<div class="per mono">'+money(per)+'/month'+(t.size>1?' · '+money(per/t.size)+' per person per month':'')+'</div>'+
         (ok?'':'<div class="min">Minimum '+t.min+' months</div>')+
@@ -808,7 +927,7 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
       '<div class="stage money"><span>New revenue per month</span><b class="mono">'+money(clients*deal)+'</b></div>'+
       '<div class="stage"><span>Austin\'s strategy-session time per month</span><b class="mono">'+(held*50/60).toFixed(1)+' h</b></div>';
   }
-  if($("#s-vis")){simIds.forEach(function(k){$("#s-"+k).addEventListener("input",sim)}); sim();}
+  simIds.forEach(function(k){$("#s-"+k).addEventListener("input",sim)}); sim();
 
   /* capacity mix */
   var mix={prod:4,lead:2,team:1,div:1,circle:1};
@@ -821,7 +940,7 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
     var hrs=0,mo=0; mixItems.forEach(function(t){hrs+=mix[t.id]*t.hrs; mo+=mix[t.id]*t.mo;});
     $("#k-hrs").textContent=(hrs*12/52).toFixed(1); $("#k-mo").textContent=money(mo); $("#k-yr").textContent=money(mo*12); $("#k-x").textContent=(mo/2000).toFixed(1)+"×";
   }
-  if($("#mix")) renderMix();
+  renderMix();
 })();
 </script>
 
