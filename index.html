@@ -34,6 +34,7 @@
   --display:Georgia, "Times New Roman", serif; --caps:none;
 }
 *{box-sizing:border-box}
+html{overflow-x:clip}
 body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);overflow-x:clip;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));}
 h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1;margin:0;text-transform:var(--caps);font-weight:800;letter-spacing:.005em}
@@ -221,7 +222,7 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
 .ticker:hover .ticker-in{animation-play-state:paused}
 @keyframes tick{to{transform:translateX(-50%)}}
 .room{position:relative;margin-top:64px;padding-block:clamp(32px,5vw,64px);color:var(--band-fg)}
-.room::before{content:"";position:absolute;inset:0 -100vmax;background:linear-gradient(180deg,var(--band),var(--band-2));border-block:1px solid var(--band-line)}
+.room::before{content:"";position:absolute;inset:0 calc(50% - 50vw);background:linear-gradient(180deg,var(--band),var(--band-2));border-block:1px solid var(--band-line)}
 .room>*{position:relative}
 .room h2{font-size:clamp(34px,5vw,60px)}
 .room p{max-width:60ch;margin-top:14px;color:var(--band-muted);font-size:17px}
@@ -250,7 +251,7 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
 :root[data-mode="site"] .view:not(#v-book) .site{padding-top:clamp(32px,5vw,64px)}
 :root.public .picks{display:none}
 .band{position:relative;color:var(--band-fg);padding-block:clamp(36px,6vw,84px);margin-bottom:clamp(28px,4vw,48px)}
-.band::before{content:"";position:absolute;inset:0 -100vmax;background:radial-gradient(1200px 500px at 70% 0%,var(--band-2),var(--band) 70%);z-index:0}
+.band::before{content:"";position:absolute;inset:0 calc(50% - 50vw);background:radial-gradient(1200px 500px at 70% 0%,var(--band-2),var(--band) 70%);z-index:0}
 .band>*{position:relative;z-index:1}
 .band .label{color:var(--brass-d)}
 .band .hero h1 em{color:var(--band-accent)}
