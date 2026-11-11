@@ -96,7 +96,17 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .cover .s{font:500 13px/1.4 var(--body);opacity:.75;margin-top:12px}
 .bricks{display:grid;grid-template-columns:repeat(13,1fr);gap:3px}
 .bricks i{display:block;aspect-ratio:2/1;background:rgba(255,255,255,.13);border-radius:1px}
-.bricks i.on{background:var(--brass-d)}
+.bricks i.on{background:rgba(255,255,255,.62)}
+.bricks i.gold.on{background:var(--band-accent);box-shadow:0 0 14px color-mix(in srgb,var(--band-accent) 70%,transparent)}
+.bricks i.new{animation:pop .4s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{from{transform:scale(2.2) translateY(-6px);opacity:.2}to{transform:none;opacity:1}}
+.bcap{font:600 12px/1.35 var(--body);margin-top:6px;min-height:2.7em;color:var(--band-accent)}
+.bhint{font:700 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--band-muted);text-align:center;margin-top:14px;transition:opacity .3s}
+.bhint.gone{opacity:0}
+.coverwrap{justify-self:center;width:100%;max-width:320px}
+.cover.built{box-shadow:0 0 0 1px var(--band-accent),0 0 80px -10px color-mix(in srgb,var(--band-accent) 55%,transparent),30px 40px 70px -30px rgba(0,0,0,.7)}
+.cover{transition:transform .25s ease-out,box-shadow .6s}
+:root.pin #v-book .band .hero{position:sticky;top:96px}
 .cover .a{font:600 11px/1 var(--body);letter-spacing:.2em;text-transform:uppercase}
 .proof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:clamp(32px,5vw,56px)}
 .proof div{background:var(--surface);padding:16px 18px}
@@ -210,6 +220,49 @@ tr:last-child td{border-bottom:0}
 .src{font-size:13px;color:var(--muted);display:grid;gap:4px}
 .src code{font-family:var(--mono);font-size:12px;word-break:break-all}
 footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
+
+/* numbers board, growth chart, scorecard */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+.tabs button{border:1px solid var(--line);background:transparent;color:var(--muted);padding:10px 16px;border-radius:4px;cursor:pointer;font:700 17px/1 var(--display);letter-spacing:.05em;text-transform:var(--caps);transition:color .15s,border-color .15s,background .15s}
+.tabs button:hover{color:var(--fg);border-color:var(--fg)}
+.tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.panel{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:12px;border-radius:4px;overflow:hidden}
+.panel>div{background:var(--surface);padding:22px 20px;display:grid;gap:6px;align-content:start}
+.panel b{font:800 clamp(40px,5vw,64px)/.95 var(--display);color:var(--accent);font-variant-numeric:tabular-nums}
+.panel span{font-size:14px;color:var(--muted)}
+.panel .src-tag{color:var(--muted)}
+.panel-note{font-size:13px;color:var(--muted);margin-top:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.chips.yr button{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:4px;padding:6px 10px;font:700 13px var(--mono);cursor:pointer;transition:all .15s}
+.chips.yr button:hover,.chips.yr button.on{border-color:var(--accent);color:var(--accent)}
+.growth{margin-top:56px}
+.gbars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:end;height:260px;margin-top:24px;border-bottom:1px solid var(--line);padding-inline:4px}
+.gbar{display:grid;grid-template-rows:auto 1fr;height:100%;align-items:end;gap:8px;cursor:default}
+.gbar .v{font:800 clamp(22px,3vw,34px)/1 var(--display);color:var(--fg);align-self:end;transition:color .2s}
+.gbar i{display:block;background:var(--line);border-radius:3px 3px 0 0;transform-origin:bottom;animation:rise .9s cubic-bezier(.2,.7,.2,1) both;transition:background .2s;align-self:end}
+.gbar:hover i,.gbar.on i{background:var(--accent)}.gbar:hover .v,.gbar.on .v{color:var(--accent)}
+.gbar.pace i{background:repeating-linear-gradient(135deg,var(--line) 0 8px,transparent 8px 14px);border:1px solid var(--line);border-bottom:0}
+.gbar.pace:hover i{background:repeating-linear-gradient(135deg,var(--accent) 0 8px,transparent 8px 14px);border-color:var(--accent)}
+@keyframes rise{from{transform:scaleY(.03)}to{transform:none}}
+.glabels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;padding-inline:4px;margin-top:8px;font:700 13px var(--mono);color:var(--muted)}
+.gsay{margin-top:14px;min-height:3em;font-size:15px;color:var(--muted);max-width:62ch}
+.gsay b{color:var(--fg)}
+.score{margin-top:64px;border:1px solid var(--line);border-radius:4px;padding:clamp(20px,4vw,40px);background:var(--surface);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(24px,4vw,48px)}
+.score h2{font-size:clamp(32px,4.6vw,56px)}
+.q{display:grid;gap:8px;padding:14px 0;border-bottom:1px solid var(--line)}
+.q:last-child{border-bottom:0}
+.q p{font-weight:600}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:4px;overflow:hidden;width:max-content;max-width:100%}
+.seg button{border:0;background:transparent;color:var(--muted);padding:8px 16px;cursor:pointer;font:600 14px var(--body);border-right:1px solid var(--line);transition:background .15s,color .15s}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+.verdict{display:grid;gap:12px;align-content:start;position:sticky;top:90px;align-self:start}
+.verdict .big{font-size:clamp(64px,9vw,120px);color:var(--accent);line-height:.85}
+.verdict .big small{font-size:.35em;color:var(--muted)}
+.verdict h3{font-size:32px}
+.vbar{height:10px;background:var(--sunk);border-radius:5px;overflow:hidden}
+.vbar i{display:block;height:100%;width:0;background:var(--accent);transition:width .4s cubic-bezier(.2,.7,.2,1)}
+@media (max-width:820px){.panel{grid-template-columns:repeat(2,minmax(0,1fr))}.score{grid-template-columns:minmax(0,1fr)}.verdict{position:static}.gbars{height:200px;gap:8px}.glabels{gap:8px}}
 
 /* scoreboard brand */
 .tier,.offer,.rep,.result,.browser,.calc,.sim,.kpi,.day,.obj>div,.stats,.proof,.tbl,.entry>div,.slot,.stepnav a,.field select,.field input[type=number],.optin input{border-radius:4px}
@@ -447,14 +500,14 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
           </form>
           <p class="small" style="margin-top:8px">Free. Or <a href="#chapter">order the paperback</a> and get $500 toward any coaching program.</p>
         </div>
-        <div class="cover" aria-label="Book cover mock-up">
+        <div class="coverwrap"><div class="cover" aria-label="Book cover: 52 bricks, one per week, that fill in as you scroll">
           <div class="a">Austin Oberbillig</div>
           <div>
-            <div class="bricks" id="bricks" aria-hidden="true"></div><div class="bcount" id="bcount">31 of 52 weeks laid</div>
+            <div class="bricks" id="bricks" aria-hidden="true"></div><div class="bcount" id="bcount">0 of 52 weeks laid</div><div class="bcap" id="bcap"></div>
             <div class="t" style="margin-top:18px">The Long<br>Game</div>
             <div class="s">Five conversations that changed my life, and the systems that built a sales division</div>
           </div>
-        </div>
+        </div><div class="bhint" id="bhint">Scroll to lay the bricks ↓</div></div>
       </div></div>
       <div class="ticker" aria-hidden="true"><div class="ticker-in" id="ticker"></div></div>
       <div class="proof">
@@ -467,6 +520,28 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
         <div><div class="label">Part two</div><h3>Know your real numbers</h3><p>Profit per event, cost per lead, and the gap between what you think you make and what you keep.</p></div>
         <div><div class="label">Part three</div><h3>Culture is the leader's shadow</h3><p>People don't follow vision alone. They follow trust.</p></div>
       </div>
+      <div class="score">
+        <div>
+          <div class="label">60-second team scorecard</div>
+          <h2 style="margin-top:10px">Is your team built for the long game?</h2>
+          <p class="muted" style="margin-top:10px">Four questions Austin asks every sales leader. Answer straight.</p>
+          <div style="margin-top:14px" id="quiz">
+            <div class="q"><p>Every rep knows what they actually keep after costs, not only what they sold.</p><div class="seg" role="group" aria-label="Real numbers" data-q="0"><button type="button" data-v="0">No</button><button type="button" data-v="1" aria-pressed="true">Sort of</button><button type="button" data-v="2">Yes</button></div></div>
+            <div class="q"><p>We have a written standard for who we hire, and we turn people away.</p><div class="seg" role="group" aria-label="Recruiting standard" data-q="1"><button type="button" data-v="0" aria-pressed="true">No</button><button type="button" data-v="1">Sort of</button><button type="button" data-v="2">Yes</button></div></div>
+            <div class="q"><p>Everyone on the team sees the scoreboard every week.</p><div class="seg" role="group" aria-label="Scoreboard" data-q="2"><button type="button" data-v="0">No</button><button type="button" data-v="1" aria-pressed="true">Sort of</button><button type="button" data-v="2">Yes</button></div></div>
+            <div class="q"><p>If I left for a month, my best rep could run the team.</p><div class="seg" role="group" aria-label="Leadership bench" data-q="3"><button type="button" data-v="0" aria-pressed="true">No</button><button type="button" data-v="1">Sort of</button><button type="button" data-v="2">Yes</button></div></div>
+          </div>
+        </div>
+        <div class="verdict" aria-live="polite">
+          <div class="label">Your score</div>
+          <div class="big mono"><span id="sc-n">2</span><small> / 8</small></div>
+          <div class="vbar"><i id="sc-bar"></i></div>
+          <h3 id="sc-h"></h3>
+          <p class="muted" id="sc-p"></p>
+          <div class="row"><a class="btn primary" id="sc-cta" href="#apply">Apply for a strategy session</a></div>
+        </div>
+      </div>
+
       <blockquote class="quote">"Don't choose an extra $100 a week. Choose an extra $100,000 a year, a few years from now. Bet on you."<cite>Austin Oberbillig, Floors &amp; Ceilings (2023)</cite></blockquote>
     </div>
   </div>
@@ -508,17 +583,59 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
         <div><span class="src-tag">His 2023 site</span><b class="mono">76×</b><span class="small">growth: $17K in 2017 to over $1.3M by 2022</span></div>
       </div>
 
-      <h2 style="margin-top:56px;font-size:clamp(34px,5vw,60px)">Twelve years, one company, one city</h2>
+      <div style="margin-top:64px">
+        <div class="label">The work, counted</div>
+        <h2 style="margin-top:10px;font-size:clamp(34px,5vw,60px)">How many people, how many calls</h2>
+        <div class="tabs" role="tablist" id="ntabs">
+          <button type="button" role="tab" aria-selected="true" data-t="career">Since 2014</button>
+          <button type="button" role="tab" aria-selected="false" data-t="recent">Last four years</button>
+          
+          <button type="button" role="tab" aria-selected="false" data-t="record">On the record</button>
+        </div>
+        <div class="panel" data-p="career">
+          <div><b data-to="800" data-pre="~">~800</b><span>sales reps trained and worked with</span><span class="src-tag">Published, 2025</span></div>
+          <div><b data-to="10" data-pre="$" data-suf="M">$10M</b><span>generated by his Seattle/Bellevue office since 2017</span><span class="src-tag">Published, 2025</span></div>
+          <div><b data-to="12">12</b><span>years with one company, from first-week rep to division leader</span><span class="src-tag">Published</span></div>
+          <div><b data-to="3">3</b><span>reps developed past $1M in personal sales, which he says no other district manager has done</span><span class="src-tag">Recorded call, 2026</span></div>
+        </div>
+        <div class="panel" data-p="recent" hidden>
+          <div><b>#1</b><span>office in the company in 2022, District Team Silver Cup</span><span class="src-tag">Public podcast</span></div>
+          <div><b data-to="2">2</b><span>national titles in 2023: "our double national championship office"</span><span class="src-tag">Published, 2025</span></div>
+          <div><b data-to="2025">2025</b><span>Hall of Fame, then asked to lead the Washington Division</span><span class="src-tag">Recorded call</span></div>
+          <div><b data-to="2.8" data-pre="$" data-suf="M" data-dec="1">$2.8M</b><span>the pace his division was on for 2026, as of September</span><span class="src-tag">Recorded call, Sept 2026</span></div>
+        </div>
+        
+        <div class="panel" data-p="record" hidden>
+          <div><b data-to="942">942</b><span>recorded calls since 2024, every one transcribed</span><span class="src-tag">Otter index, Nov 10 2026</span></div>
+          <div><b data-to="572">572</b><span>of them in 2026 alone</span><span class="src-tag">Otter index</span></div>
+          <div><b data-to="110" data-pre="~">~110</b><span>one-on-one strategy sessions with investors and founders</span><span class="src-tag">Otter index, by title</span></div>
+          <div><b data-to="100" data-pre="~">~100</b><span>coaching calls with young sales professionals through Dream Life Academy</span><span class="src-tag">Otter index, by title</span></div>
+        </div>
+      </div>
+
+      <h2 style="margin-top:64px;font-size:clamp(34px,5vw,60px)">Twelve years, one company, one city</h2>
+      <div class="chips yr" id="yrchips" aria-label="Jump to a year"></div>
       <ol class="tl">
         <li><span class="yr">2014</span><div><h3>A letter in the mail</h3><p>At 18, a checker at Safeway, he got a letter from Vector Marketing and threw it away. His mom kept it. Three weeks later he was fired from Safeway, and the letter came in handy. He sold $1,100 on his first three appointments, nothing the next day, and tried to quit 72 hours after training. He stayed, and sold just under $80,000 in his first ten months.</p><span class="src-tag">Published · Open Letter, 2025</span></div></li>
         <li><span class="yr">2015</span><div><h3>Into management, under his first mentor</h3><p>Nine months in, he was promoted to Pilot Sales Manager at the Washington Division headquarters in Seattle, under Ryan Casey, who he calls "my first and most impactful mentor." He says he was the youngest person ever promoted to that job.</p><span class="src-tag">Published + recorded call</span></div></li>
         <li><span class="yr">2016</span><div><h3>The couch years</h3><p>He paid a friend to sleep on his couch, then lived in his aunt and uncle's spare room, then a sorority house. He sold his racing bike for a fifth of its value to pay for gas and food. "I never counted the hours."</p><span class="src-tag">Published · Floors &amp; Ceilings, 2023</span></div></li>
         <li><span class="yr">2017</span><div><h3>His own office, above a karate studio</h3><p>At 22 he signed a $27,000 commercial lease on Bel-Red Road in Bellevue and made a 10-year commitment to build something there. His first summer he sold under $100,000 against a $500,000 goal.</p><span class="src-tag">Published · Open Letter, 2025</span></div></li>
         <li><span class="yr">2018</span><div><h3>From $152,000 to $732,000</h3><p>District sales grew almost five times in a year, finishing as the #2 new office in the company. A year later his office had the second-highest sales productivity of hundreds of offices across the U.S.</p><span class="src-tag">Published · 2019 and 2025 posts</span></div></li>
+        <li><span class="yr">2019</span><div><h3>Seven figures before 24</h3><p>"A bonafide seven figure sales manager before my 24th birthday." A year later, in 2020, his team moved to selling virtually and kept growing.</p><span class="src-tag">Published · 2019 post, and his 2023 site</span></div></li>
+        <li><span class="yr">2021</span><div><h3>Five offices</h3><p>At its peak his district ran five offices, including his own.</p><span class="src-tag">Recorded call · 2026</span></div></li>
         <li><span class="yr">2022</span><div><h3>#1 office in the company</h3><p>His district finished first in the company in the District Team competition and won the Silver Cup.</p><span class="src-tag">Public · Changing Lives Selling Knives, ep. 382</span></div></li>
-        <li><span class="yr">2023</span><div><h3>Coaching other people's teams</h3><p>He launched Kairos Ventures, a strategy-coaching practice for top salespeople and managers, built on one promise: "If you're still working with me after 12 months, I haven't done my job." He says he had spent $25,000 to $30,000 a year on his own coaching since 2018.</p><span class="src-tag">Public · kairosventuresllc.squarespace.com</span></div></li>
+        <li><span class="yr">2023</span><div><h3>A double national title, and coaching other teams</h3><p>His office won what he calls a double national championship. The same year he launched Kairos Ventures, a strategy-coaching practice for top salespeople and managers, built on one promise: "If you're still working with me after 12 months, I haven't done my job." He says he had spent $25,000 to $30,000 a year on his own coaching since 2018.</p><span class="src-tag">Public · kairosventuresllc.squarespace.com</span></div></li>
         <li><span class="yr">2025</span><div><h3>Hall of Fame, then the division</h3><p>He promised himself he'd stay a district manager until he made Hall of Fame or turned 30. He did both within 90 days. That summer he was asked to lead the Washington Division, "the job that you wanted for a decade."</p><span class="src-tag">Recorded call · 2026</span></div></li>
+        <li><span class="yr">2026</span><div><h3>A division on a $2.8M pace</h3><p>In his first full year leading the division, it was on pace for about $2.8 million by September, about double what his district used to average. He also coaches young sales professionals through Dream Life Academy.</p><span class="src-tag">Recorded call · Sept 2026</span></div></li>
       </ol>
+
+      <div class="growth">
+        <div class="label">What the long game looks like</div>
+        <h2 style="margin-top:10px;font-size:clamp(34px,5vw,60px)">Yearly sales, four checkpoints</h2>
+        <div class="gbars" id="gbars"></div>
+        <div class="glabels"><span>2017</span><span>2018</span><span>2022</span><span>2026 pace</span></div>
+        <p class="gsay" id="gsay"></p>
+      </div>
 
       <div class="ab-cols">
         <div>
@@ -757,6 +874,7 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
     if(m==="site") root.setAttribute("data-mode","site"); else root.removeAttribute("data-mode");
     document.querySelectorAll(".modepick button").forEach(function(x){x.setAttribute("aria-pressed",String(x.dataset.mode===m))});
     if(!isPublic){try{localStorage.setItem("lg-mode",m)}catch(e){}}
+    if(typeof setPin==="function"&&typeof cur!=="undefined"){ try{ setPin(); brickScroll(); }catch(e){} }
   }
   document.querySelectorAll(".modepick button").forEach(function(x){x.addEventListener("click",function(){setMode(x.dataset.mode)})});
   if(isPublic) setMode("site"); else { try{var sm=localStorage.getItem("lg-mode"); if(sm) setMode(sm);}catch(e){} }
@@ -794,8 +912,9 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
     var hv=(v==="call")?"apply":v;
     document.querySelectorAll("#hnav a[data-h]").forEach(function(a){ if(a.dataset.h===hv) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
     $("#ctabar").classList.toggle("show",v==="book"||v==="about"||v==="programs");
-    reveal();
+    reveal(); if(heroEl){ setPin(); brickScroll(); }
     window.scrollTo(0,0);
+    if(v==="about"){ var fp=document.querySelector('.panel[data-p]:not([hidden])'); if(fp) countUp(fp); document.querySelectorAll(".gbar i").forEach(function(i){ var a=i.style.animationDelay; i.style.animation="none"; void i.offsetWidth; i.style.animation=""; i.style.animationDelay=a; }); }
     if(v==="about"){ document.querySelectorAll(".yrs i").forEach(function(i){ i.style.animation="none"; void i.offsetWidth; i.style.animation=""; }); onScroll(); }
   }
   document.addEventListener("keydown",function(e){
@@ -821,12 +940,66 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
     var items=tl.querySelectorAll("li"), last=null;
     items.forEach(function(li){ var top=li.getBoundingClientRect().top; var lit=top<mid; li.classList.toggle("lit",lit); if(lit) last=li; li.classList.remove("now"); });
     if(last) last.classList.add("now");
+    var cy=last?last.querySelector(".yr").textContent:""; document.querySelectorAll("#yrchips button").forEach(function(b){b.classList.toggle("on",b.dataset.y===cy)});
   }
   window.addEventListener("scroll",onScroll,{passive:true}); window.addEventListener("resize",onScroll);
 
   window.addEventListener("hashchange",show); show();
 
   var tk=$("#ticker"); if(tk){ var items=["Vector Hall of Fame","#1 office in the company, 2022","4 national championships","$10M+ in sales","800 reps trained","12+ All-Americans","6 years #1 in rep productivity","Silver Cup"]; var h=items.map(function(t){return "<span>"+t+"</span>"}).join(""); tk.innerHTML=h+h; }
+
+  /* numbers board: tabs + count-up */
+  function countUp(scope){
+    scope.querySelectorAll("b[data-to]").forEach(function(el){
+      var to=+el.dataset.to, pre=el.dataset.pre||"", suf=el.dataset.suf||"", dec=+(el.dataset.dec||0), yr=to>1900&&to<2100&&!pre&&!suf, t0=performance.now(), d=still?0:900;
+      (function step(now){ var q=d?Math.min(1,(now-t0)/d):1; q=1-Math.pow(1-q,3); var v=yr?Math.round(to-40+40*q):to*q; el.textContent=pre+(dec?v.toFixed(dec):(yr?String(Math.round(v)):Math.round(v).toLocaleString("en-US")))+suf; if(q<1) requestAnimationFrame(step); })(t0);
+    });
+  }
+  var ntabs=$("#ntabs");
+  if(ntabs){
+    ntabs.addEventListener("click",function(e){
+      var b=e.target.closest("button"); if(!b) return;
+      ntabs.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-selected",String(x===b))});
+      document.querySelectorAll(".panel[data-p]").forEach(function(pn){ pn.hidden=pn.dataset.p!==b.dataset.t; if(!pn.hidden) countUp(pn); });
+      var ln=$("#li-note"); if(ln) ln.hidden=b.dataset.t!=="li";
+    });
+  }
+
+  /* timeline year chips */
+  var chips=$("#yrchips");
+  if(chips){
+    document.querySelectorAll(".tl li").forEach(function(li){
+      var y=li.querySelector(".yr").textContent, b=document.createElement("button"); b.type="button"; b.textContent=y; b.dataset.y=y;
+      b.addEventListener("click",function(){ li.scrollIntoView({behavior:still?"auto":"smooth",block:"center"}); });
+      chips.appendChild(b);
+    });
+  }
+
+  /* growth chart: four verified checkpoints, drawn to one scale */
+  var gb=$("#gbars");
+  if(gb){
+    var pts=[[152,"$152K","2017, his first year with his own office. He missed his first summer goal by 80%.","Published"],[732,"$732K","2018. Almost five times bigger in twelve months, and the #2 new office in the company.","Published"],[1350,"$1.35M","2022. #1 office in the company. His district has averaged about $1.35M a year.","Published + his 2023 site"],[2800,"$2.8M","2026 pace, as of September, for the whole division he now leads. A pace, not a final number.","Recorded call"]];
+    gb.innerHTML=pts.map(function(p,i){return '<div class="gbar'+(i===3?" pace":"")+'" data-i="'+i+'" tabindex="0"><span class="v mono">'+p[1]+'</span><i style="height:'+Math.max(3,p[0]/2800*190)+'px;animation-delay:'+(i*120)+'ms"></i></div>'}).join("");
+    function gsay(i){ gb.querySelectorAll(".gbar").forEach(function(x,j){x.classList.toggle("on",j===i)}); $("#gsay").innerHTML="<b>"+pts[i][1]+".</b> "+pts[i][2]+' <span class="src-tag">'+pts[i][3]+"</span>"; }
+    gb.querySelectorAll(".gbar").forEach(function(x){ var i=+x.dataset.i; x.addEventListener("pointerenter",function(){gsay(i)}); x.addEventListener("focus",function(){gsay(i)}); x.addEventListener("click",function(){gsay(i)}); });
+    gsay(1);
+  }
+
+  /* 60-second scorecard */
+  var quiz=$("#quiz");
+  if(quiz){
+    function score(){
+      var n=0; quiz.querySelectorAll('.seg button[aria-pressed="true"]').forEach(function(b){n+=+b.dataset.v});
+      $("#sc-n").textContent=n; $("#sc-bar").style.width=(n/8*100)+"%";
+      var h,p,c,l;
+      if(n<=3){h="Leaking";p="Your team sells, but the money and the people are walking out the back door. Start with real numbers and a hiring standard. That is what a strategy session covers.";c="#apply";l="Apply for a strategy session";}
+      else if(n<=6){h="Solid, but capped";p="The basics are there. What caps you is that the team still runs through you. Chapter 1 is about exactly that bet.";c="#chapter";l="Read Chapter 1 free";}
+      else {h="Built to last";p="You are running the long game already. The next step is other leaders at your level, and a second set of eyes on your numbers.";c="#programs";l="See the programs";}
+      $("#sc-h").textContent=h; $("#sc-p").textContent=p; var a=$("#sc-cta"); a.setAttribute("href",c); a.textContent=l;
+    }
+    quiz.addEventListener("click",function(e){ var b=e.target.closest(".seg button"); if(!b) return; b.parentNode.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",String(x===b))}); score(); });
+    score();
+  }
 
   /* rep sales by year (personal sales, $K, from their interviews) */
   function reps(id,rows){
@@ -838,10 +1011,35 @@ footer{padding-block:24px 48px;font-size:13px;color:var(--muted)}
   reps("#rep-z",[["Yr 1",50],["2022",200],["2023",225],["2024",250],["2025",325]]);
 
   /* cover bricks: 52 weeks, filled = weeks laid */
-  var br=$("#bricks");
-  function countBricks(){ $("#bcount").textContent=br.querySelectorAll("i.on").length+" of 52 weeks laid"; }
-  for(var i=0;i<52;i++){ (function(n){ var e=document.createElement("i"); if(n<31) e.className="on"; e.title="Week "+(n+1); e.addEventListener("click",function(){ e.classList.toggle("on"); countBricks(); }); br.appendChild(e); })(i); }
-  countBricks();
+  /* the cover builds brick by brick as you scroll; gold bricks are the weeks that mattered */
+  var br=$("#bricks"), band=document.querySelector("#v-book .band"), heroEl=document.querySelector("#v-book .hero"), coverEl=document.querySelector("#v-book .cover");
+  var gold={0:"2014 · First sale, at 18",7:"2015 · Promoted to manager, nine months in",15:"2017 · Signs a $27,000 lease at 22",22:"2018 · $152K to $732K in one year",33:"2022 · #1 office in the company",41:"2023 · Double national title",51:"2025 · Hall of Fame"};
+  var bricksEl=[], laid=-1, pinOn=false, PIN=1500;
+  for(var i=0;i<52;i++){ var e=document.createElement("i"); if(gold[i]) e.className="gold"; e.title=gold[i]||("Week "+(i+1)); br.appendChild(e); bricksEl.push(e); }
+  function lay(n){
+    if(n===laid) return;
+    bricksEl.forEach(function(e,i){ var on=i<n; if(on&&!e.classList.contains("on")&&laid>=0&&n>laid){ e.classList.add("new"); setTimeout(function(){e.classList.remove("new")},450); } e.classList.toggle("on",on); });
+    var cap=""; for(var k in gold){ if(+k<n) cap=gold[k]; }
+    $("#bcount").textContent=n+" of 52 weeks laid"; $("#bcap").textContent=n>=52?"The house.":cap;
+    coverEl.classList.toggle("built",n>=52); $("#bhint").classList.toggle("gone",n>2);
+    laid=n;
+  }
+  function setPin(){
+    var want=!still&&root.getAttribute("data-mode")==="site"&&cur==="book"&&window.innerWidth>=900&&window.innerHeight>=heroEl.offsetHeight+130;
+    if(want!==pinOn){ pinOn=want; root.classList.toggle("pin",want); band.style.height=want?(band.offsetHeight+PIN)+"px":""; }
+    else if(want){ band.style.height=""; band.style.height=(band.offsetHeight+PIN)+"px"; }
+  }
+  function brickScroll(){
+    if(still){ lay(52); return; }
+    if(cur!=="book") return;
+    var q;
+    if(pinOn){ var r=band.getBoundingClientRect(), pad=parseFloat(getComputedStyle(band).paddingTop)||0; q=(96-(r.top+pad))/(PIN-80); }
+    else { var c=coverEl.getBoundingClientRect(), vh=window.innerHeight; q=(vh*0.72-c.top)/(c.height*0.9+vh*0.35); if(window.scrollY<4) q=0; }
+    lay(Math.round(Math.max(0,Math.min(1,q))*52));
+  }
+  window.addEventListener("scroll",brickScroll,{passive:true});
+  window.addEventListener("resize",function(){ setPin(); brickScroll(); });
+  setPin(); brickScroll();
 
   $("#optin").addEventListener("submit",function(ev){ev.preventDefault(); location.hash="chapter";});
   $("#buybook").addEventListener("click",function(){ $("#buynote").textContent="In the live version this opens checkout, then goes to the application with the $500 credit attached."; });
